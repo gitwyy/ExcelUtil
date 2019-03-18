@@ -5,12 +5,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * The <code>ExcelCell</code><br>
  * 数值型的栏位只能使用Double
- * 
  * @see {@link com.sargeraswang.util.ExcelUtil.ExcelUtil#exportExcel}
  * @author sargeras.wang
  * @version 1.0, Created at 2013年9月14日
@@ -22,66 +20,66 @@ public @interface ExcelCell {
     /**
      * 顺序 default 100
      * 
-     * @return
+     * @return index
      */
-    public int index();
+    int index();
 
     /**
      * 当值为null时要显示的值 default StringUtils.EMPTY
      * 
-     * @return
+     * @return defaultValue
      */
-    public String defaultValue() default StringUtils.EMPTY;
+    String defaultValue() default "";
 
     /**
      * 用于验证
      * 
-     * @return
+     * @return valid
      */
-    public Valid valid() default @Valid();
+    Valid valid() default @Valid();
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    public @interface Valid {
+    @interface Valid {
         /**
          * 必须与in中String相符,目前仅支持String类型
          * 
-         * @return e.g. {"abc","123"}
+         * @return e.g. {"key","value"}
          */
-        public String[] in() default {};
+        String[] in() default {};
 
         /**
          * 是否允许为空,用于验证数据 default true
          * 
-         * @return
+         * @return allowNull
          */
-        public boolean allowNull() default true;
+        boolean allowNull() default true;
 
         /**
-         * Apply a "greater than" constraint to the named property , equivalent ">"
+         * Apply a "greater than" constraint to the named property
          * 
-         * @return
+         * @return gt
          */
-        public double gt() default Double.NaN;
+        double gt() default Double.NaN;
 
         /**
-         * Apply a "less than" constraint to the named property , equivalent "<"
-         * @return
+         * Apply a "less than" constraint to the named property
+         * @return lt
          */
-        public double lt() default Double.NaN;
+        double lt() default Double.NaN;
 
         /**
-         * Apply a "greater than or equal" constraint to the named property , equivalent ">="
+         * Apply a "greater than or equal" constraint to the named property
          * 
-         * @return
+         * @return ge
          */
-        public double ge() default Double.NaN;
+        double ge() default Double.NaN;
 
         /**
-         * Apply a "less than or equal" constraint to the named property , equivalent "<="
+         * Apply a "less than or equal" constraint to the named property
          * 
-         * @return
+         * @return le
          */
-        public double le() default Double.NaN;
+        double le() default Double.NaN;
     }
 }
